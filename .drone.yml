@@ -6,12 +6,12 @@ pipeline:
     commands:
       - export OUTPUT_PATH=${PWD}
       - apk add --no-cache ca-certificates git openssh curl perl
-      - git clone https://github.com/drone-plugins/drone-github-plugin $GOPATH/src/github.com/drone-plugins/drone-github-plugin
-      - cd $GOPATH/src/github.com/drone-plugins/drone-github-plugin
+      - git clone https://github.com/drone-plugins/drone-github-release $GOPATH/src/github.com/drone-plugins/drone-github-release
+      - cd $GOPATH/src/github.com/drone-plugins/drone-github-release
       - go vet
       - go test -cover -coverprofile=coverage.out
       - go build -ldflags "-s -w -X main.build=$DRONE_BUILD_NUMBER" -a -tags netgo
-      - cp drone-github-plugin ${OUTPUT_PATH}
+      - cp drone-github-release ${OUTPUT_PATH}
 
   docker:
     repo: armswarmdrone/github-release
